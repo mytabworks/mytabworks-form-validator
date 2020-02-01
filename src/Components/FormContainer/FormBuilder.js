@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FormContext } from './FormContext'
-import { useFormState } from './useFormHooks'
+import { useForm } from './useFormHooks'
 
 const formPropTypes = {
     id: PropTypes.string,
@@ -12,9 +12,9 @@ const formDefaultProps = {}
 
 const Form = ({children, onSubmit, ...props}) => {
     
-    const [formState, formUpdate, formSet, formHandler] = useFormState({})
+    const [formState, formUpdate, formRegister, formHandler] = useForm({})
 
-    const context = {formState, formUpdate, formSet}
+    const context = {formState, formUpdate, formRegister}
 
     const handlerSubmit = formHandler(onSubmit)
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { FormContext } from '../FormContainer'
+import { FormContext } from '../FormContainer/FormContext'
 import { DoneTypingEvent } from 'mytabworks-utils' 
 
 const InputPropTypes = {
@@ -11,7 +11,8 @@ const InputPropTypes = {
     type:       PropTypes.string,
     className:  PropTypes.string,
     children:   PropTypes.array,
-    alias:      PropTypes.string
+    alias:      PropTypes.string,
+    onChange:   PropTypes.func
 }
 
 const InputDefaultProps = {
@@ -25,13 +26,18 @@ const convertToChild = ({finalId, options, props}) => {
     : options.map(({label, ...individualAttr}, key) => <label key={finalId+'-'+key}><input {...props} {...individualAttr} /><span>{label}</span></label>)
 }
 
-const Input = ({id, label, name, validate, type, className, children, alias, ...props}) => {
-    console.log('renders')
+const eventHandler = ({target, formUpdate, onChange, alias}) => {
+    onChange && onChange({target, value: target.value, name: target.name}) 
+    formUpdate({target}, alias)
+}
+
+const Input = ({id, label, name, validate, type, className, children, alias, onChange, ...props}) => {
+    
     const facadeName = alias || name
     
     const finalId = id || facadeName
     
-    const {formState, formUpdate, formSet} = useContext(FormContext)
+    const {formState, formUpdate, formRegister} = useContext(FormContext)
 
     const state = formState(facadeName)
 
@@ -42,13 +48,14 @@ const Input = ({id, label, name, validate, type, className, children, alias, ...
     const handleEvents = validate ? (
                             isClickable ? { 
                                 onChange: ({target}) => {
-                                    props.onChange && props.onChange({target, value: target.value, name: target.name}) 
-                                    formUpdate({target}, alias) 
+                                    eventHandler({target, formUpdate, onChange, alias})
                                 } 
-                            } : DoneTypingEvent(e => formUpdate(e, alias), 500)
+                            } : DoneTypingEvent(({target}) => { 
+                                    eventHandler({target, formUpdate, onChange, alias})
+                            }, 500)
                         ) : {}
 
-    formSet({name: facadeName, label, validate}, useEffect)
+    formRegister({name: facadeName, label, validate}, useEffect)
 
     props = { ...props, name, type, alias}
 

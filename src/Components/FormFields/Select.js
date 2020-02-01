@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { FormContext } from '../FormContainer' 
-import Select2 from './Select'
+import { FormContext } from '../FormContainer/FormContext' 
+
 const SelectPropTypes = {
     id:         PropTypes.string.isRequired,
     label:      PropTypes.string,
@@ -16,13 +16,19 @@ const SelectDefaultProps = {
     className: ''
 }
 
+const renderOptions = ({id, options}) => options.map(({ label, value }, key) => {
+    return Array.isArray(value)
+        ? <optgroup key={`${id}-${key}`} label={label}>{value.map(({ label, value }, keyg) => <option key={`${id}-${key}-${keyg}`} value={value}>{label}</option>)}</optgroup>
+        : <option key={`${id}-${key}`} value={value}>{label}</option>
+})
+
 const Select = ({id, label, name, validate, className, children, alias, ...props}) => {
 
     const facadeName = alias || name
     
     const finalId = id || facadeName
     
-    const {formState, formUpdate, formSet} = useContext(FormContext)
+    const {formState, formUpdate, formRegister} = useContext(FormContext)
 
     const state = formState(facadeName)
 
@@ -35,21 +41,18 @@ const Select = ({id, label, name, validate, className, children, alias, ...props
                             } 
                             : {}
 
-    formSet({name: facadeName, label, validate}, useEffect)
+    formRegister({name: facadeName, label, validate}, useEffect)
 
-    props = { ...props, name}
+    props = { ...props, name, alias}
+
+    const selectOptions = useMemo(() => renderOptions({id, options: children}), [children, id])
 
     return (
         <div className={`form-control ${className}`.trim()}>
             {label && <label htmlFor={finalId}>{label}</label>}
-            {/* <select id={finalId} {...props} {...handleEvents}>
-                {children.map(({label, value}, key) => {
-                    return Array.isArray(value)
-                        ? value.map(({label, value}, keyg) => <option key={`${id}-${key}-${keyg}`} value={value}>{label}</option>)
-                        : <option key={`${id}-${key}`} value={value}>{label}</option>
-                })}
-            </select> */}
-            <Select2 id={finalId} {...props} {...handleEvents}>{children}</Select2>
+            <select id={finalId} {...props} {...handleEvents}>
+                {selectOptions}
+            </select>
             {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
         </div>
     )

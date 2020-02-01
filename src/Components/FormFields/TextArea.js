@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { FormContext } from '../FormContainer'
+import { FormContext } from '../FormContainer/FormContext'
 import { DoneTypingEvent } from 'mytabworks-utils' 
 
 const TextAreaPropTypes = {
@@ -23,13 +23,13 @@ const TextArea = ({id, label, name, validate, className, children, alias, ...pro
     
     const finalId = id || facadeName
     
-    const {formState, formUpdate, formSet} = useContext(FormContext)
+    const {formState, formUpdate, formRegister} = useContext(FormContext)
 
     const state = formState(facadeName)
 
     const handleEvents = validate ? DoneTypingEvent(e => formUpdate(e, alias), 500) : {}
 
-    formSet({name: facadeName, label, validate}, useEffect)
+    formRegister({name: facadeName, label, validate}, useEffect)
 
     props = { ...props, name, alias}
 

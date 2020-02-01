@@ -1,12 +1,12 @@
 import { useState } from 'react' 
 import { Validator } from 'mytabworks-utils'
 import { FormEvent } from './FormEvent'
-const validator = new Validator()
-// const getter = useContext
+import { FormContext } from './FormContext'
+const validator = new Validator() 
  
-// export const getFormState = () => {
-//     return getter(FormContext)
-// }
+export const useFormState = (willGet) => {
+    return willGet(FormContext)
+}
 
 const formUpdater = (state, target, alias) => {
     let  { name, value, form, files, selectedOptions } = target
@@ -24,7 +24,7 @@ const formUpdater = (state, target, alias) => {
     }
 
     if(selectedOptions) {
-        value = selectedOptions
+        value = Array.from(selectedOptions)
     }
 
     const updateState = {...state[name]}
@@ -40,11 +40,11 @@ const formUpdater = (state, target, alias) => {
     return {...state, [name]: updateState}
 }
 
-export const useFormState = (fields = {}) => {
+export const useForm = (fields = {}) => {
 
     const [form, setForm] = useState(fields)
 
-    const formState = name => form[name]
+    const formState = name => name ? form[name] : form
     
     const formUpdate = ({target}, alias) => { 
  
@@ -53,7 +53,7 @@ export const useFormState = (fields = {}) => {
 
     // const willMount = useEffect
 
-    const setFormWhenMount = ({name, label, validate, useEffect}, willMount) => {
+    const setFormWhenMount = ({name, label, validate}, willMount) => {
         
         validate && willMount(() => {
 
