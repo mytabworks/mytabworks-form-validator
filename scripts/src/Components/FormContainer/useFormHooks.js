@@ -22,7 +22,7 @@ const formUpdater = (state, target, alias) => {
         value = files
     }
 
-    if(selectedOptions) {
+    if(selectedOptions && target.multiple) {
         value = Array.from(selectedOptions)
     }
 

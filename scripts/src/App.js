@@ -6,6 +6,7 @@ import { same, required_if, max_size } from 'mytabworks-utils/extend/rules'
 Validator.rulesExtend({same, required_if, max_size}) 
 
 const selectChild = [
+  {label: 'option', value: ''},
   {label: 'beginer', value: '1'},
   {label: 'mid-level', value: [
     {label: 'intermidiate', value: '2'},
@@ -86,7 +87,7 @@ function App() {
             <Select label="Level" rules="required|max:3|min:2" name="level" placeholder="choose one" multiple={true}  onChange={handler}>
               {selectChild}
             </Select>
-            <Select label="Level-2" alias="sasa"  name="level" placeholder="choose one"  onChange={handler}>
+            <Select label="Level-2" rules="required" alias="sasa"  name="level" placeholder="choose one"  onChange={handler}>
               {selectChild}
             </Select>
             <TextArea rules="required" name="about" placeholder="describe your self..." label="About yourself" onChange={handler}></TextArea>
