@@ -1,23 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { FormContext } from '../FormContainer/FormContext'
 import { DoneTypingEvent } from 'mytabworks-utils' 
+import FormFieldPropTypes from './FormFieldPropTypes'
 
 const TextAreaPropTypes = {
-    id:         PropTypes.string.isRequired,
-    label:      PropTypes.string,
-    name:       PropTypes.string.isRequired,
-    validate:   PropTypes.string, 
-    className:  PropTypes.string,
-    children:   PropTypes.array,
-    alias:      PropTypes.string
+    ...FormFieldPropTypes,
+    children: PropTypes.string, 
 }
 
 const TextAreaDefaultProps = { 
     className: ''
 }
 
-const TextArea = ({id, label, name, validate, className, children, alias, ...props}) => {
+const TextArea = ({id, label, name, validate, className, children, alias, onChange, ...props}) => {
     
     const facadeName = alias || name
     
@@ -27,7 +23,11 @@ const TextArea = ({id, label, name, validate, className, children, alias, ...pro
 
     const state = formState(facadeName)
 
-    const handleEvents = validate ? DoneTypingEvent(e => formUpdate(e, alias), 500) : {}
+    const handleEvents = validate 
+        ? DoneTypingEvent(({target}) => {
+            onChange && onChange({target, value: target.value, name: target.name}) 
+            formUpdate({target}, alias)
+        }, 500) : {onChange}
 
     formRegister({name: facadeName, label, validate}, useEffect)
 
@@ -35,7 +35,7 @@ const TextArea = ({id, label, name, validate, className, children, alias, ...pro
 
     return (
         <div className={`form-control ${className}`.trim()}>
-            {label && <label htmlFor={finalId}>{label}</label>}
+            {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
             <textarea id={finalId} {...props} {...handleEvents} >{children}</textarea>
             {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
         </div>

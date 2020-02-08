@@ -4,7 +4,8 @@ module.exports = {
     mode: 'production',
     entry: './Components/index.js',
     externals : {
-        react: 'react'
+        react: 'react',
+        'mytabworks-utils': 'mytabworks-utils'
     },
     output: {
         path: path.resolve('lib'),
@@ -20,6 +21,7 @@ module.exports = {
             },
             {
                 test: /\.css?$/, 
+                exclude: /(node_modules)/,
                 use: ["style-loader", "css-loader"]
             }
         ]

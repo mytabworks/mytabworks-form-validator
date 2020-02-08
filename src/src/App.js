@@ -17,9 +17,9 @@ const selectChild = [
   {label: 'mid-expert', value: '4'},
   {label: 'expert', value: '5'},
 ]
-const onSubmit = (e) => console.log(e.isReady(), e, e.param())
+const onSubmit = (e) => console.log(e.locateFailed(), e, e.param())
 
-const Design = (props) => {
+const Design = () => {
   const {formRegister, formUpdate, formState} = useFormState(React.useContext)
 
   const {ui, ux} = formState() 
@@ -29,7 +29,7 @@ const Design = (props) => {
     {name:'ux', label:'UX', validate: 'required|min:10'}
   ]
 
-  registration.map(registry => {
+  registration.forEach(registry => {
     formRegister(registry, React.useEffect)
   })
 
@@ -49,40 +49,49 @@ const Design = (props) => {
   )
 }
 
+
 function App() {
   let form
-  const [state, setState] = React.useState({value: ''}) 
+  const [state, setState] = React.useState({value: null}) 
+
+  const handler = (e) => {
+    const value = e.target.value; setState({value: value})
+  }
   return (
     <div className="">
       <Form ref={form} id="example-basic" method="post" name="example" onSubmit={onSubmit}>
             { state.value === '1' && <Design/> }
-            <Input validate="required|same:sample@Sample" type="text" name="name" placeholder="enter your name..." label="Name"/>
-            <Input validate="same:sample@Sample" type="text" name="name" placeholder="enter your name..." label="Name2" alias="name-2"/>
+            <Input validate="required|same:sample@Sample" type="text" name="name" placeholder="enter your name..." label="Name" onChange={handler}/>
+            <Input  type="text" name="name" placeholder="enter your name..." label="Name2" alias="name-2" onChange={handler} />
             <Input type="text" name="sample" value={state.value} placeholder="enter your email..." label="E-mail" />
-            <Input validate="required" type="radio" name="gender" className="inline-box" label="Gender" >
+            <Input validate="required" type="radio" name="gender" className="inline-box" label="Gender" onChange={handler}>
               {[
                 {label: 'male', value: '1'},
                 {label: 'female', value: '2'},
               ]}
             </Input>
-            <Input validate="required|min:2|max:3" type="checkbox" name="interested[]" className="inline-box" label="Interested">
+            <Input validate="min:2|max:3" type="checkbox" name="interested[]" className="inline-box" label="Interested">
               {state.value !== '1'?[
                 {label: 'javascript', value: '1'},
                 {label: 'c#', value: '2'},
                 {label: 'php', value: '3'},
-                {label: 'java', value: '4'},
+                {label: 'java', value: '4', defaultChecked: true},
               ]: [
                 {label: 'php', value: '3'},
                 {label: 'java', value: '4'},
               ]}
             </Input>
-            <Select label="Level" validate="required|max:3|min:2" name="level" placeholder="choose one" multiple={true}  onChange={(e) => {const value = e.target.value; setState({value: value})}}>
+            <Select label="Level" validate="required|max:3|min:2" name="level" placeholder="choose one" multiple={true}  onChange={handler}>
+              {selectChild}
+            </Select>
+            <Select label="Level-2" alias="sasa"  name="level" placeholder="choose one"  onChange={handler}>
               {selectChild}
             </Select>
             <div style={(state.value !== '4') ? {display: 'none'} : {}}>
-              <TextArea validate="required" name="about" placeholder="describe your self..." label="About yourself"></TextArea>
+              <TextArea validate="required" name="about" placeholder="describe your self..." label="About yourself" onChange={handler}></TextArea>
             </div>
-            {state.value !== '1' && <Input multiple validate="mimes:jpg|max_size:1000|max:2" type="file" name="resume" label="Your Resume`"/>}
+            <TextArea alias="required" name="about" placeholder="describe your self..." label="About yourself" onChange={handler}></TextArea>
+            {state.value !== '1' && <Input multiple validate="mimes:jpg|max_size:1000|max:2|min:2" type="file" name="resume" label="Your Resume`"/>}
 
             <button type="submit" style={{padding:"10px 15px", backgroundColor:'ivory'}}>Button is your choice</button>
 

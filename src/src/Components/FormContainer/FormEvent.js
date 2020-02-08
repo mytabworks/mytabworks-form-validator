@@ -14,12 +14,16 @@ export class FormEvent {
       this.formdata = new FormData(form)
     }
 
-    locateRequired() {
+    locateFailed(correction = 40) {
       this.topError || this.isReady()
-      if(!this.topError) return;
-      const error = this.target.querySelector(`[name="${this.topError}"]`)
+
       const root = document.documentElement
-      return root.scrollTop = (root.scrollTop + error.getBoundingClientRect().top) - 70
+
+      if(!this.topError) return root.scrollTop;
+
+      const error = this.target.querySelector(`[name="${this.topError}"], [alias="${this.topError}"]`) 
+
+      return root.scrollTop = (root.scrollTop + error.getBoundingClientRect().top) - correction
 
     }
 

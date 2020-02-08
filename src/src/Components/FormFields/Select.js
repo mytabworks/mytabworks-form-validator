@@ -1,15 +1,9 @@
 import React, { useContext, useEffect, useMemo } from 'react'
-import PropTypes from 'prop-types'
 import { FormContext } from '../FormContainer/FormContext' 
+import FormFieldPropTypes from './FormFieldPropTypes'
 
-const SelectPropTypes = {
-    id:         PropTypes.string.isRequired,
-    label:      PropTypes.string,
-    name:       PropTypes.string.isRequired,
-    validate:   PropTypes.string,
-    className:  PropTypes.string,
-    children:   PropTypes.array,
-    alias:      PropTypes.string
+const SelectPropTypes = { 
+    ...FormFieldPropTypes
 }
 
 const SelectDefaultProps = {
@@ -22,7 +16,7 @@ const renderOptions = ({id, options}) => options.map(({ label, value }, key) => 
         : <option key={`${id}-${key}`} value={value}>{label}</option>
 })
 
-const Select = ({id, label, name, validate, className, children, alias, ...props}) => {
+const Select = ({id, label, name, validate, className, children, alias, onChange, ...props}) => {
 
     const facadeName = alias || name
     
@@ -35,11 +29,11 @@ const Select = ({id, label, name, validate, className, children, alias, ...props
     const handleEvents = validate 
                             ? { 
                                 onChange: ({target}) => {
-                                    props.onChange && props.onChange({target, value: target.value, name: target.name}) 
+                                    onChange && onChange({target, value: target.value, name: target.name}) 
                                     formUpdate({target}, alias) 
                                 } 
                             } 
-                            : {}
+                            : {onChange}
 
     formRegister({name: facadeName, label, validate}, useEffect)
 
@@ -49,7 +43,7 @@ const Select = ({id, label, name, validate, className, children, alias, ...props
 
     return (
         <div className={`form-control ${className}`.trim()}>
-            {label && <label htmlFor={finalId}>{label}</label>}
+            {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
             <select id={finalId} {...props} {...handleEvents}>
                 {selectOptions}
             </select>

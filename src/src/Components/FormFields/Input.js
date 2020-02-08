@@ -2,17 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { FormContext } from '../FormContainer/FormContext'
 import { DoneTypingEvent } from 'mytabworks-utils' 
+import FormFieldPropTypes from './FormFieldPropTypes'
 
 const InputPropTypes = {
-    id:         PropTypes.string.isRequired,
-    label:      PropTypes.string,
-    name:       PropTypes.string.isRequired,
-    validate:   PropTypes.string,
-    type:       PropTypes.string,
-    className:  PropTypes.string,
-    children:   PropTypes.array,
-    alias:      PropTypes.string,
-    onChange:   PropTypes.func
+    ...FormFieldPropTypes,
+    type: PropTypes.string,
 }
 
 const InputDefaultProps = {
@@ -53,21 +47,21 @@ const Input = ({id, label, name, validate, type, className, children, alias, onC
                             } : DoneTypingEvent(({target}) => { 
                                     eventHandler({target, formUpdate, onChange, alias})
                             }, 500)
-                        ) : {}
+                        ) : {onChange}
 
     formRegister({name: facadeName, label, validate}, useEffect)
 
     props = { ...props, name, type, alias}
 
     return isChoices ? (
-        <div className={`form-control ${className}`.trim()} {...handleEvents}>
-          {label && <label htmlFor={finalId}>{label}</label>}
+        <div className={`form-control ${className}`.trim()} {...handleEvents} id={finalId}>
+          {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
           {convertToChild({finalId, options: children, props})}
           {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
         </div>
     ) : (
         <div className={`form-control ${className}`.trim()}>
-            {label && <label htmlFor={finalId}>{label}</label>}
+            {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
             <input id={finalId} name={name} {...props} {...handleEvents} />
             {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
         </div>

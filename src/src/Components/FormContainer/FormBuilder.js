@@ -6,7 +6,7 @@ import { useForm } from './useFormHooks'
 const formPropTypes = {
     id: PropTypes.string,
     onSubmit: PropTypes.func,
-    children: PropTypes.array
+    children: PropTypes.any
 }
 const formDefaultProps = {}
 
