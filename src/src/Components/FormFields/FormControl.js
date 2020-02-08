@@ -16,7 +16,7 @@ const FormControlDefaultProps = {
 
 const FormControl = ({finalId, label, validate, className, children, state}) => (
     <div className={`form-control ${className}`.trim()}>
-        {label && <label htmlFor={finalId}>{label}{validate && /\|?required\|?/.test(validate) && <span className="required">*</span>}</label>}
+        {label && <label htmlFor={finalId}>{label}{validate && /required[^_]/.test(validate) && <span className="required">*</span>}</label>}
         {children}
         {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
     </div>
