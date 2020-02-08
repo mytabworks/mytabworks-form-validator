@@ -12,13 +12,19 @@ The validation style is inspired by Laravel Validator kudos!.
 ```
 npm i mytabworks-react-form-validator
 ```
+
+
 # How to use
+
 
 ## import to your project
 ```js
 import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
 ```
+
+
 ## Basic Usage
+```html
 <Form>
     <Input type="text" id="name" name="name" placeholder="enter your name..." label="Name"/>
     <Select id="vote" name="vote" label="Level">
@@ -29,6 +35,8 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
     </Select>
     <TextArea id="comment" name="comment" placeholder="what is on your mind..."></TextArea>
 </Form>
+```
+
 
 ## Form Validate Usage
 ```html
@@ -67,8 +75,11 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
     <button type="submit" style={{padding:"10px 15px", backgroundColor:"ivory"}}>Submit me</button>
 </Form>
 ```
+
+
 # Customizable
 It can customize a new Component for validation and can even implement on old Component without changing its props
+
 
 ## Before Customize
 ```js
@@ -90,6 +101,7 @@ export const Design = ({disabled = false}) => {
     )
 }
 ```
+
 
 ## After Customize
 ```js
@@ -137,6 +149,7 @@ export const Design = ({disabled = false}) => {
   }
 ```
 
+
 ## Implementation of Customize
 ```js
 import React from 'react'
@@ -152,6 +165,7 @@ export const Fields = () {
     )
 }
 ```
+
 
 ## Form Submition
 ```js
@@ -181,6 +195,7 @@ const handleSubmit = (formevent) => {
 </Form>
 ```
 
+
 ## `Form` Properties
 All properties that is supported by Form Component.<br/>
 The datatypes with "*" means it is required.
@@ -189,6 +204,7 @@ The datatypes with "*" means it is required.
 |-------------|---------------|-------------|-------------|
 |form defaults attribute| [mozila form documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) | and [w3schools form documentation](https://www.w3schools.com/tags/tag_form.asp) | All the default attributes of the form element tag can be use. visit the link for more info.
 |onSubmit| function | | instance `FormEvent` will be passed unto the function argument with the capablities of getting the form data of the form.|
+
 
 ### `FormEvent` methods for Form onSubmit
 All properties that is supported by instance FormEvent.<br/>
@@ -225,6 +241,7 @@ The datatypes with "*" means it is required.
 | alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in select tag supported or data-something |
 
+
 ### `Select option properties`
 All the properties of each option
 
@@ -233,6 +250,7 @@ All the properties of each option
 | label       | string *      |             | label of the option|
 | value       | string|array *|             | the value of the option, if array of object of label and value will be group in optgroup| 
 | ....etc     |               |             | you can passed on anything individually supported or data-something |
+
 
 ### Select option with group usage 
 ```html
@@ -255,6 +273,7 @@ All the properties of each option
 </Form>
 ```
 
+
 ## `TextArea` Properties
 All properties that is supported by TextArea Component.<br/>
 The datatypes with "*" means it is required.
@@ -271,6 +290,7 @@ The datatypes with "*" means it is required.
 | validate    | string        |             | it enables to validate the form field|
 | alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in textarea tag supported or data-something |
+
 
 ## `Input` Properties
 All properties that is supported by Input Component.<br/>
@@ -290,6 +310,7 @@ The datatypes with "*" means it is required.
 | alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in input tag supported or data-something |
 
+
 ### `Input type [checkbox, radio] children individual props`
 All the properties of the Individual children of type [checkbox, radio]
 
@@ -300,6 +321,7 @@ All the properties of the Individual children of type [checkbox, radio]
 | disabled    | boolean       | false       | disabling the [checkbox, radio] individually | 
 | defaultChecked| boolean     | false       | it will checked individually the type [checkbox, radio] |
 | ....etc     |               |             | you can passed on anything individually supported or data-something |
+
 
 ### `Example for type [checkbox, radio]`
 ```html
@@ -316,12 +338,17 @@ All the properties of the Individual children of type [checkbox, radio]
 </Form>
 ```
 
+
 ## Validations
 
-### [default validations](https://github.com/mytabworks/mytabworks-utils#validator-current-validations)
-### [extension validations](https://github.com/mytabworks/mytabworks-utils#validator-extension-validations)
+### [What are the current or supported validations?](https://github.com/mytabworks/mytabworks-utils#validator-current-validations)
+
+### [What are the extension validations?](https://github.com/mytabworks/mytabworks-utils#validator-extension-validations)
+
 ### [How to extend validation](https://github.com/mytabworks/mytabworks-utils#validator-extend-validations)
-### [How to create customize validation](https://github.com/mytabworks/mytabworks-utils#validator-customize-validation)
+
+### [How to create a customize validation?](https://github.com/mytabworks/mytabworks-utils#validator-customize-validation)
+
 
 ## License
 MIT Licensed. Copyright (c) Mytabworks 2020.
