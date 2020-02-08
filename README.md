@@ -263,7 +263,7 @@ const strong_password = {
     /*note! if you have second_param you must put :third_party in the message*/
 }
 
-Validator.extend({ max_size, min_size, required_if, alpha_space, strong_password })
+Validator.extend({ same, strong_password })
 
 ```
 ```js
