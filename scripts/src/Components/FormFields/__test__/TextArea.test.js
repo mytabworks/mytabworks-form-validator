@@ -6,7 +6,7 @@ import TextArea from '../TextArea.js';
 describe('TextArea consistent test agrregation', () => {
 
     test('basic usage', () => {
-        const { getByTestId } = render(<Form><TextArea id="test-1" validate="required" name="textarea-1" data-testid="test"/></Form>)
+        const { getByTestId } = render(<Form><TextArea id="test-1" rules="required" name="textarea-1" data-testid="test"/></Form>)
 
         const textarea = getByTestId("test")
 
@@ -42,7 +42,7 @@ describe('TextArea consistent test agrregation', () => {
     test('if other props are rendered', () => {
         const { getByTestId } = render(
             <Form>
-                <TextArea validate="required" id="test-2" name="input-2" value="sample" className="formation" label="TXT" alias="alias-2" disabled={true} data-testid="test">
+                <TextArea rules="required" id="test-2" name="input-2" value="sample" className="formation" label="TXT" alias="alias-2" disabled={true} data-testid="test">
                     sample
                 </TextArea>
             </Form>

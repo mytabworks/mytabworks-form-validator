@@ -1,10 +1,10 @@
 
 # mytabworks-react-form-validator
 This repository is a `light-weight`, `eazy`, `fast`, `powerlful` and ultimately... `beautiful`!, yes! you read it exactly as it is.</br>
-It is `light-weight` because it was build from the ground up, no extra dependency added. it dont need reducer to call over time and don't need to pass on a event handler to children to children. The validations is extendable and yet reusable. It can be extend with your own validations added in the framework, so there is no need to redundantly create a validations.</br>
+It is `light-weight` because it was build from the ground up, no extra dependency added. it dont need reducer to call over time and don't need to pass on a event handler to children to children. The rules is extendable and yet reusable. It can be extend with your own rules added in the framework, so there is no need to redundantly create a rules.</br>
 It is `easy` to implement, because in just a few characters you are validating. it can be implemented with other component without a sweat, cheers!</br>
 It is `fast` because it is made to be fast, it was build to make the state rest from every entry, and it don't need to call the whole reducer like redux does.
-It is `powerful` bacause you can validate your form field components without affecting your properties. that is why it can be easily use in both small and scalable projects.</br>
+It is `powerful` bacause you can rules your form field components without affecting your properties. that is why it can be easily use in both small and scalable projects.</br>
 It is `beautiful` because it don`t need a ugly and redandunt hard to maintain conditional validation code, and rendering of event handlers to children to children, because validation can be implemented beautifully in components to components without the old fashion terror implementation.</br>
 The validation style is inspired by Laravel Validator!.
 
@@ -38,18 +38,18 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
 ```
 
 
-## Advance Usage with validate
+## Advance Usage with rules
 ```html
 <Form>
-    <Input validate="required|alpha" type="text" id="name" name="name" placeholder="enter your name..." label="Name"/>
-    <Input validate="required|email" type="text" id="email" name="email" placeholder="enter your email..." label="E-mail"/> 
-    <Input validate="required" type="radio" id="gender" name="gender" className="inline-box" label="Gender" >
+    <Input rules="required|alpha" type="text" id="name" name="name" placeholder="enter your name..." label="Name"/>
+    <Input rules="required|email" type="text" id="email" name="email" placeholder="enter your email..." label="E-mail"/> 
+    <Input rules="required" type="radio" id="gender" name="gender" className="inline-box" label="Gender" >
         {[
             {label: "Male", value: "1"},
             {label: "Female", value: "2"},
         ]}
     </Input>
-    <Input validate="min:2|max:3" type="checkbox" id="interest" name="interested[]" className="inline-box" label="Interested">
+    <Input rules="min:2|max:3" type="checkbox" id="interest" name="interested[]" className="inline-box" label="Interested">
         {[
             {label: "javascript", value: "1", defaultChecked: true},
             {label: "c#", value: "2", disabled: true},
@@ -57,7 +57,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
             {label: "java", value: "4"}
         ]}
     </Input>
-    <Select validate="required" id="level" name="level" label="Level">
+    <Select rules="required" id="level" name="level" label="Level">
         {[  
             {label: "choose one..", value: ""},
             {label: "beginer", value: "1"},
@@ -68,8 +68,8 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
             {label: "expert", value: "4"}
         ]}
     </Select>
-    <TextArea validate="required" id="about" name="about" placeholder="describe your self..." defaultValue="I'am" label="About yourself"/>
-    <Input validate="mimes:pdf,csv|max:2" type="file" id="resume" name="resume" multiple label="Your Resume`"/>
+    <TextArea rules="required" id="about" name="about" placeholder="describe your self..." defaultValue="I'am" label="About yourself"/>
+    <Input rules="mimes:pdf,csv|max:2" type="file" id="resume" name="resume" multiple label="Your Resume`"/>
 
     <button type="submit" style={{padding:"10px 15px", backgroundColor:"ivory"}}>Submit me</button>
 </Form>
@@ -115,8 +115,8 @@ export const Design = ({disabled = false}) => {
     const {ui, ux} = formState() 
     
     const registration = [
-      {name:'ui', label:'labelUI', validate: 'required|max:10'},
-      {name:'ux', label:'labelUX', validate: 'required|min:10'}
+      {name:'ui', label:'labelUI', rules: 'required|max:10'},
+      {name:'ux', label:'labelUX', rules: 'required|min:10'}
     ]
     
     /*registration of the fields to the state*/
@@ -195,14 +195,14 @@ const handleSubmit = (formevent) => {
 ```
 
 
-## Validations
+## rules
 
-### [What are the current or supported validations? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-current-validations)
+### [What are the current or supported rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-current-rules)
 
-### [What are the extension validations? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extension-validations)
+### [What are the extension rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extension-rules)
 
-### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-validations)
-Validator does not require to repeatedly extend validation each component, you only have to extend validations each once, I suggest to import it to the ancestors component that handle all Forms
+### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-rules)
+Validator does not require to repeatedly extend validation each component, you only have to extend rules each once, I suggest to import it to the ancestors component that handle all Forms
 
 ```js
 import { Validator } from "mytabworks-utils";
@@ -211,7 +211,7 @@ import {
     min_size,
     required_if,
     alpha_space
-} from "mytabworks-utils/extend/validations";
+} from "mytabworks-utils/extend/rules";
 // required_if:name_of_target_field=target_expected_value 
 // required_if can use @ as Alias to cover the real name_of_target_field and target_expected_value because they are mostly developer readable 
 // required_if's target_expected_value can be regular expression or a normal string
@@ -228,9 +228,9 @@ Validator.extend({ max_size, min_size, required_if, alpha_space })
     export const ReasonFields = () =>{
         retrun (
             <div>
-                <Input type="text" validate="alpha_space" name="rss" id="rss" label="Reasons"/>
-                <Input type="file" validate="required_if:rss@Reasons=(.+)@has content|mimes:jpeg,xls|min_size:1000|max_size:5000" name="flexa" id="flexa" label="File XA"/>
-                <Input type="text" validate="required_if:flexa=(.*\\.jpeg)@spreadshit" name="commit" id="commit" label="Commit"/>
+                <Input type="text" rules="alpha_space" name="rss" id="rss" label="Reasons"/>
+                <Input type="file" rules="required_if:rss@Reasons=(.+)@has content|mimes:jpeg,jpg,xls|min_size:1000|max_size:5000" name="flexa" id="flexa" label="File XA"/>
+                <Input type="text" rules="required_if:flexa=(.*\.(jpeg|jpg))@spreadshit" name="commit" id="commit" label="Commit"/>
             </div>
         )
     }
@@ -242,23 +242,23 @@ Validator.extend({ max_size, min_size, required_if, alpha_space })
 import { Validator } from "mytabworks-utils";
 import { 
     same
-} from "mytabworks-utils/extend/validations";
+} from "mytabworks-utils/extend/rules";
 // same:name_of_target_field 
 // all those who have second parameter can use @ as Alias
 const strong_password = {
     regexp: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$/g,
     exe(
         received, /*it is the value of the input you put*/
-        first_param, /*validations:first_param*/ 
-        second_param    /*validations:first_param=second_param*/
+        first_param, /*rules:first_param*/ 
+        second_param    /*rules:first_param=second_param*/
     ) {
         /*we don't need first_param and second_param for this validation*/
         /*must return true when it is INVALID*/
         return !this.regexp.test(received)
     },
     message: "The :attribute must have 1 small letter, 1 capital letter, 1 number, and 1 special character"
-    /*note! the :attribute is replace with the label of the form field you validate*/
-    /*note! if you have first_param in your validations you must put the same name as your validation like :strong_password in the message*/
+    /*note! the :attribute is replace with the label of the form field you rules*/
+    /*note! if you have first_param in your rules you must put the same name as your validation like :strong_password in the message*/
     /*note! if you have second_param you must put :third_party in the message*/
 }
 
@@ -271,9 +271,9 @@ Validator.extend({ same, strong_password })
     export const Register = () =>{
         retrun (
             <Form>
-                <Input type="text" validate="required|alpha" name="hname" id="hname" label="Name"/> 
-                <Input type="password" validate="required|strong_password" name="p_word" id="p_word" label="Password"/> 
-                <Input type="password" validate="required|same:p_word@Password" name="confirm" id="confirm" label="Confirm"/>
+                <Input type="text" rules="required|alpha" name="hname" id="hname" label="Name"/> 
+                <Input type="password" rules="required|strong_password" name="p_word" id="p_word" label="Password"/> 
+                <Input type="password" rules="required|same:p_word@Password" name="confirm" id="confirm" label="Confirm"/>
                 <button type="submit">Submit</button>
             </Form>
         )
@@ -298,7 +298,7 @@ All properties that is supported by instance FormEvent.<br/>
 |---------------|---------------|-------------|
 |.target        | form element  | It will get the form element.|
 |.locateFailed()| integer       | It will locate the form field that fails the requirements. you can adjust the position by passing a int parameter .locateFailed(70/*default is 40*/) depends on your navbar height if it is floating|
-|.isReady()     | boolean       | It will check if the form is ready and passed all the requirement validations.|
+|.isReady()     | boolean       | It will check if the form is ready and passed all the requirement rules.|
 |.json()        | object        | It will return the form data in json.|
 |.paramArray()  | array         | It will return the form data in array.|
 |.param()       | string        | It will return the form data in url encode string.|
@@ -321,8 +321,8 @@ The datatypes with "*" means it is required.
 | disabled    | bolean        | false       | disabling the Select|
 | multiple    | boolean       | false       | it allow users to select multiple option|
 | onChange    | function      |             | it enables to subscribe change event|
-| validate    | string        |             | it enables to validate the form field|
-| alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
+| rules    | string        |             | it enables to rules the form field|
+| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in select tag supported or data-something |
 
 
@@ -373,8 +373,8 @@ The datatypes with "*" means it is required.
 | className   | string        |             | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the textarea| 
 | onChange    | function      |             | it enables to subscribe change event|
-| validate    | string        |             | it enables to validate the form field|
-| alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
+| rules    | string        |             | it enables to rules the form field|
+| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in textarea tag supported or data-something |
 
 
@@ -394,8 +394,8 @@ The datatypes with "*" means it is required.
 | className   | string        |             | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the input | 
 | onChange    | function      |             | it enables to subscribe change event|
-| validate    | string        |             | it enables to validate the form field|
-| alias       | string        |             | it enables to distinctively validate a form field with the same name, especially when user have priviledges to add new field| 
+| rules    | string        |             | it enables to rules the form field|
+| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
 | ....etc     |               |             | you can passed on anything in input tag supported or data-something |
 
 
@@ -413,7 +413,7 @@ All the properties of the Individual children of type [checkbox, radio]
 
 ### `Example for type [checkbox, radio]`
 ```html
-/*All properties set in Input will be a property of all the individual except [className, label, validate] because this will all goes in form field container*/
+/*All properties set in Input will be a property of all the individual except [className, label, rules] because this will all goes in form field container*/
 <Form>
     <Input type="checkbox" id="interest" name="interested[]" className="inline-box" label="Interested">
         {[

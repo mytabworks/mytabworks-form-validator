@@ -1,6 +1,6 @@
 {
     "name": "mytabworks-react-form-validator",
-    "version": "1.1.1",
+    "version": "1.1.3",
     "main": "lib/index.js",
     "description": "This repository was build from the ground up. it is as expected to be a light-weight and fast because of the optimization.\\nIt is a powerful yet light-weight dependency that can benefit both dev and user at it's fullest.",
     "repository": {
@@ -15,6 +15,8 @@
         "mytabworks-react-form-validator",
         "form",
         "easy-form-validator",
+        "good-form-validator",
+        "good-easy-form-validator",
         "form-validation",
         "react-form-validation",
         "beautiful-form-validation"
@@ -50,6 +52,6 @@
         "webpack-cli": "^3.2.1"
     },
     "dependencies": {
-        "mytabworks-utils": "^1.0.2"
+        "mytabworks-utils": "^1.1.1"
     }
 }

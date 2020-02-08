@@ -43,7 +43,7 @@ describe('Input consistent test agrregation', () => {
     })
 
     test('if other props are rendered', () => {
-        const { getByTestId } = render(<Form><Input type="email" validate="required|email" id="test-2" name="input-2" value="sample" className="formation" label="Xample" alias="alias-2" disabled={true} data-testid="test"/></Form>)
+        const { getByTestId } = render(<Form><Input type="email" rules="required|email" id="test-2" name="input-2" value="sample" className="formation" label="Xample" alias="alias-2" disabled={true} data-testid="test"/></Form>)
 
         const input = getByTestId("test")
 
@@ -100,7 +100,7 @@ describe('Input consistent test agrregation', () => {
 
     test('type checkbox rendering', () => {
         const { getAllByTestId, getByText } = render(<Form>
-                <Input type="checkbox" className="formation" validate="required" id="test-3" name="input-3[]" label="Checkbox" alias="checkok" data-testid="test">
+                <Input type="checkbox" className="formation" rules="required" id="test-3" name="input-3[]" label="Checkbox" alias="checkok" data-testid="test">
                     {[
                         {label: "box-1", value: "1"},
                         {label: "box-2", value: "2"},

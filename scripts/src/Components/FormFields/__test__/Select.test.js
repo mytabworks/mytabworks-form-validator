@@ -22,7 +22,7 @@ const onSubmit = e => {
 
 describe('Select consistent test agrregation', () => {
     test('basic usage with disabled', () => {
-        const { getByTestId } = render(<Form onSubmit={onSubmit} data-testid="form"><Select validate="required" id="test-1" name="select-1" disabled={true} alias="sel" data-testid="test">{selectChild}</Select></Form>)
+        const { getByTestId } = render(<Form onSubmit={onSubmit} data-testid="form"><Select rules="required" id="test-1" name="select-1" disabled={true} alias="sel" data-testid="test">{selectChild}</Select></Form>)
 
         const select = getByTestId("test")
         
@@ -71,7 +71,7 @@ describe('Select consistent test agrregation', () => {
     })
 
     test('basic usage in multiple', () => {
-        const { getByTestId } = render(<Form><Select id="test-2" validate="required" name="select-2" label="Multiple" multiple={true} data-testid="test">{selectChild}</Select></Form>)
+        const { getByTestId } = render(<Form><Select id="test-2" rules="required" name="select-2" label="Multiple" multiple={true} data-testid="test">{selectChild}</Select></Form>)
 
         const select = getByTestId("test")
         
