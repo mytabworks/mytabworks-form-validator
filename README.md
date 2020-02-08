@@ -196,6 +196,92 @@ const handleSubmit = (formevent) => {
 ```
 
 
+## Validations
+
+### [What are the current or supported validations? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-current-validations)
+
+### [What are the extension validations? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extension-validations)
+
+### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-validations)
+Validator does not require to repeatedly extend validation each component, you only have to extend validations each once, I suggest to import it to the ancestors component that handle all Forms
+
+```js
+import { Validator } from "mytabworks-utils";
+import { 
+    max_size, 
+    min_size,
+    required_if,
+    alpha_space
+} from "mytabworks-utils/extend/validations";
+// required_if:name_of_target_field=target_expected_value 
+// required_if can use @ as Alias to cover the real name_of_target_field and target_expected_value because they are mostly developer readable 
+// required_if's target_expected_value can be regular expression or a normal string
+// all those who have second parameter can use @ as Alias
+// max_size:kilobytes
+// min_size:kilobytes
+// alpha_space
+Validator.extend({ max_size, min_size, required_if, alpha_space })
+
+```
+```js
+    import {Input} from "mytabworks-react-form-validator"
+
+    export const ReasonFields = () =>{
+        retrun (
+            <div>
+                <Input type="text" validate="alpha_space" name="rss" id="rss" label="Reasons">
+                <Input type="file" validate="required_if:rss@Reasons=(.+)@has content|mimes:csv,xls|min_size:1000|max_size:5000" name="flexa" id="flexa" label="File XA">
+                <Input type="text" validate="required_if:flexa=(.*\\.xls)@spreadshit" name="commit" id="commit" label="Commit">
+            </div>
+        )
+    }
+```
+
+### [How to create a customize validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-customize-validation)
+
+```js
+import { Validator } from "mytabworks-utils";
+import { 
+    same
+} from "mytabworks-utils/extend/validations";
+// same:name_of_target_field 
+// all those who have second parameter can use @ as Alias
+const strong_password = {
+    regexp: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$/g,
+    exe(
+        received, /*it is the value of the input you put*/
+        first_param, /*validations:first_param*/ 
+        second_param    /*validations:first_param=second_param*/
+    ) {
+        /*we don't need first_param and second_param for these*/
+        /*must return true when received is invalid*/
+        return !this.regexp.test(received)
+    },
+    message: "The :attribute must have 1 small letter, 1 capital letter, 1 number, and 1 special character"
+    /*note! the :attribute is replace with the label of the form field you validate*/
+    /*note! if you require value in your validations you must put the same name as your validation like :strong_password in the message*/
+    /*note! if you require value-of-value you must put :third_party in the message*/
+}
+
+Validator.extend({ max_size, min_size, required_if, alpha_space, strong_password })
+
+```
+```js
+    import {Form, Input} from "mytabworks-react-form-validator"
+
+    export const Register = () =>{
+        retrun (
+            <Form>
+                <Input type="text" validate="required|alpha" name="hname" id="hname" label="Name"> 
+                <Input type="password" validate="required|strong_password" name="p_word" id="p_word" label="Password"> 
+                <Input type="password" validate="required|same:p_word@Password" name="confirm" id="confirm" label="Confirm">
+                <button type="submit">Submit</button>
+            </Form>
+        )
+    }
+```
+
+
 ## `Form` Properties
 All properties that is supported by Form Component.<br/>
 The datatypes with "*" means it is required.
@@ -337,17 +423,6 @@ All the properties of the Individual children of type [checkbox, radio]
     </Input>
 </Form>
 ```
-
-
-## Validations
-
-### [What are the current or supported validations?](https://github.com/mytabworks/mytabworks-utils#validator-current-validations)
-
-### [What are the extension validations?](https://github.com/mytabworks/mytabworks-utils#validator-extension-validations)
-
-### [How to extend validation](https://github.com/mytabworks/mytabworks-utils#validator-extend-validations)
-
-### [How to create a customize validation?](https://github.com/mytabworks/mytabworks-utils#validator-customize-validation)
 
 
 ## License
