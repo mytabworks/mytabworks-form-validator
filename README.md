@@ -253,14 +253,14 @@ const strong_password = {
         first_param, /*validations:first_param*/ 
         second_param    /*validations:first_param=second_param*/
     ) {
-        /*we don't need first_param and second_param for these*/
-        /*must return true when received is invalid*/
+        /*we don't need first_param and second_param for this validation*/
+        /*must return true when it is INVALID*/
         return !this.regexp.test(received)
     },
     message: "The :attribute must have 1 small letter, 1 capital letter, 1 number, and 1 special character"
     /*note! the :attribute is replace with the label of the form field you validate*/
-    /*note! if you require value in your validations you must put the same name as your validation like :strong_password in the message*/
-    /*note! if you require value-of-value you must put :third_party in the message*/
+    /*note! if you have first_param in your validations you must put the same name as your validation like :strong_password in the message*/
+    /*note! if you have second_param you must put :third_party in the message*/
 }
 
 Validator.extend({ max_size, min_size, required_if, alpha_space, strong_password })
