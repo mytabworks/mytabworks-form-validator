@@ -1,12 +1,12 @@
 
 # mytabworks-react-form-validator
 This repository is a `light-weight`, `eazy`, `fast`, `powerlful` and ultimately... `beautiful`!, yes! you read it exactly as it is.</br>
-It is `light-weight` because it was build from the ground up, no extra dependency added. it dont need reducer to call over time and don't need to pass on a event handler to children to children. The validations is extendable and yet reusable. It can be extend with your own validations added in the framework, so there is no need to redundantly create a validations. [`mytabworks-utils`]()</br>
+It is `light-weight` because it was build from the ground up, no extra dependency added. it dont need reducer to call over time and don't need to pass on a event handler to children to children. The validations is extendable and yet reusable. It can be extend with your own validations added in the framework, so there is no need to redundantly create a validations.</br>
 It is `easy` to implement, because in just a few characters you are validating. it can be implemented with other component without a sweat, cheers!</br>
 It is `fast` because it is made to be fast, it was build to make the state rest from every entry, and it don't need to call the whole reducer like redux does.
 It is `powerful` bacause you can validate your form field components without affecting your properties. that is why it can be easily use in both small and scalable projects.</br>
-It is `beautiful` because it don`t need a ugly and redandunt hard to maintain conditional validation code, and rendering of event handlers of childrens to children, because validation can be implemented beautifully in components to components without the old fashion terror implementation.</br>
-The validation style is inspired by Laravel Validator kudos!.
+It is `beautiful` because it don`t need a ugly and redandunt hard to maintain conditional validation code, and rendering of event handlers to children to children, because validation can be implemented beautifully in components to components without the old fashion terror implementation.</br>
+The validation style is inspired by Laravel Validator!.
 
 # installation
 ```
@@ -38,7 +38,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
 ```
 
 
-## Form Validate Usage
+## Advance Usage with validate
 ```html
 <Form>
     <Input validate="required|alpha" type="text" id="name" name="name" placeholder="enter your name..." label="Name"/>
