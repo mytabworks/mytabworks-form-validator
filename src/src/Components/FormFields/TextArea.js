@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
-import { FormContext } from '../FormContainer/FormContext'
-import { DoneTypingEvent } from 'mytabworks-utils' 
-import FormFieldPropTypes from './FormFieldPropTypes'
+import FormControl from './FormControl'
+import { FieldPropTypes, useField } from './FormFieldUtils'
 
 const TextAreaPropTypes = {
-    ...FormFieldPropTypes,
+    ...FieldPropTypes,
     children: PropTypes.string, 
 }
 
@@ -15,30 +14,16 @@ const TextAreaDefaultProps = {
 
 const TextArea = ({id, label, name, validate, className, children, alias, onChange, ...props}) => {
     
-    const facadeName = alias || name
-    
-    const finalId = id || facadeName
-    
-    const {formState, formUpdate, formRegister} = useContext(FormContext)
-
-    const state = formState(facadeName)
-
-    const handleEvents = validate 
-        ? DoneTypingEvent(({target}) => {
-            onChange && onChange({target, value: target.value, name: target.name}) 
-            formUpdate({target}, alias)
-        }, 500) : {onChange}
-
-    formRegister({name: facadeName, label, validate}, useEffect)
+    const { state, handleEvents, finalId } = useField({label, name, alias, id, validate, onChange})
 
     props = { ...props, name, alias}
+    
+    const formControlProps = { finalId, label, validate, className, children, state }
 
     return (
-        <div className={`form-control ${className}`.trim()}>
-            {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
+        <FormControl {...formControlProps}>
             <textarea id={finalId} {...props} {...handleEvents} ></textarea>
-            {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
-        </div>
+        </FormControl> 
     )
 }
 

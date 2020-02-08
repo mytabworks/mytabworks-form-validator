@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useMemo } from 'react'
-import { FormContext } from '../FormContainer/FormContext' 
-import FormFieldPropTypes from './FormFieldPropTypes'
+import React, { useMemo } from 'react'
+import FormControl from './FormControl'
+import { FieldPropTypes, useField } from './FormFieldUtils'
 
 const SelectPropTypes = { 
-    ...FormFieldPropTypes
+    ...FieldPropTypes
 }
 
 const SelectDefaultProps = {
@@ -18,37 +18,20 @@ const renderOptions = ({id, options}) => options.map(({ label, value }, key) => 
 
 const Select = ({id, label, name, validate, className, children, alias, onChange, ...props}) => {
 
-    const facadeName = alias || name
-    
-    const finalId = id || facadeName
-    
-    const {formState, formUpdate, formRegister} = useContext(FormContext)
-
-    const state = formState(facadeName)
-
-    const handleEvents = validate 
-                            ? { 
-                                onChange: ({target}) => {
-                                    onChange && onChange({target, value: target.value, name: target.name}) 
-                                    formUpdate({target}, alias) 
-                                } 
-                            } 
-                            : {onChange}
-
-    formRegister({name: facadeName, label, validate}, useEffect)
+    const { state, handleEvents, finalId } = useField({label, name, alias, id, validate, onChange}, true)
 
     props = { ...props, name, alias}
 
     const selectOptions = useMemo(() => renderOptions({id, options: children}), [children, id])
+    
+    const formControlProps = { finalId, label, validate, className, children, state }
 
     return (
-        <div className={`form-control ${className}`.trim()}>
-            {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
+        <FormControl {...formControlProps}>
             <select id={finalId} {...props} {...handleEvents}>
                 {selectOptions}
             </select>
-            {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
-        </div>
+        </FormControl>
     )
 }
 
