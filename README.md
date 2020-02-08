@@ -197,11 +197,11 @@ const handleSubmit = (formevent) => {
 
 ## rules
 
-### [What are the current or supported rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-current-rules)
+### [What are the current or supported rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-main-rules)
 
 ### [What are the extension rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extension-rules)
 
-### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-rules)
+### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-rules-usage))
 Validator does not require to repeatedly extend validation each component, you only have to extend rules each once, I suggest to import it to the ancestors component that handle all Forms
 
 ```js
@@ -219,7 +219,7 @@ import {
 // max_size:kilobytes
 // min_size:kilobytes
 // alpha_space
-Validator.extend({ max_size, min_size, required_if, alpha_space })
+Validator.rulesExtend({ max_size, min_size, required_if, alpha_space })
 
 ```
 ```js
@@ -236,7 +236,7 @@ Validator.extend({ max_size, min_size, required_if, alpha_space })
     }
 ```
 
-### [How to create a customize validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-customize-validation)
+### [How to create a customize validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-customize-rule-usage)
 
 ```js
 import { Validator } from "mytabworks-utils";
@@ -262,7 +262,7 @@ const strong_password = {
     /*note! if you have second_param you must put :third_party in the message*/
 }
 
-Validator.extend({ same, strong_password })
+Validator.rulesExtend({ same, strong_password })
 
 ```
 ```js
