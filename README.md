@@ -33,7 +33,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
             {label: "I Hate It", value: "4"}
         ]}
     </Select>
-    <TextArea id="comment" name="comment" placeholder="what is on your mind..."></TextArea>
+    <TextArea id="comment" name="comment" placeholder="what is on your mind..."/>
 </Form>
 ```
 
@@ -58,7 +58,8 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
         ]}
     </Input>
     <Select validate="required" id="level" name="level" label="Level">
-        {[
+        {[  
+            {label: "choose one..", value: ""},
             {label: "beginer", value: "1"},
             {label: "mid-level", value: [
                 {label: "intermidiate", value: "2"},
@@ -67,9 +68,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
             {label: "expert", value: "4"}
         ]}
     </Select>
-    <TextArea validate="required" id="about" name="about" placeholder="describe your self..." label="About yourself">
-        I'am
-    </TextArea>
+    <TextArea validate="required" id="about" name="about" placeholder="describe your self..." defaultValue="I'am" label="About yourself"/>
     <Input validate="mimes:pdf,csv|max:2" type="file" id="resume" name="resume" multiple label="Your Resume`"/>
 
     <button type="submit" style={{padding:"10px 15px", backgroundColor:"ivory"}}>Submit me</button>
@@ -316,9 +315,8 @@ The datatypes with "*" means it is required.
 | id          | string *      |             | id of the HTML select|
 | name        | string *      |             | name of the HTML select|
 | label       | string        |             | the label of your form field|
-| value       | array\|string |             | the set the default value|
-| defaultValue| array\|string |             | the set the default value|
-| placeholder | string        |             | placeholder of your Select|
+| value       | array\|string |             | the set the controllable value|
+| defaultValue| array\|string |             | the set the default value| 
 | className   | string        |             | additional className for the Component container|
 | disabled    | bolean        | false       | disabling the Select|
 | multiple    | boolean       | false       | it allow users to select multiple option|
@@ -369,6 +367,8 @@ The datatypes with "*" means it is required.
 | id          | string *      |             | id of the HTML textarea|
 | name        | string *      |             | name of the HTML textarea|
 | label       | string        |             | the label of your form field|
+| value       | array\|string |             | the set the controllable value|
+| defaultValue| array\|string |             | the set the default value| 
 | placeholder | string        |             | placeholder of your textarea|
 | className   | string        |             | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the textarea| 
@@ -388,7 +388,9 @@ The datatypes with "*" means it is required.
 | name        | string *      |             | name of the HTML input|
 | type        | string        | text        | type of the HTML input. all the type in input field is supported, but radio and checkbox have small different mechanics because it is a selection|
 | label       | string        |             | the label of your form field|
-| placeholder | string        |             | placeholder of your input exluded [radio, checkbox]|
+| value       | array\|string |             | the set the controllable value only for [type of fields that supported it]|
+| defaultValue| array\|string |             | the set the default value only for [type of fields that supported it]| 
+| placeholder | string        |             | placeholder of your input exluded [radio, checkbox, color, range]|
 | className   | string        |             | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the input | 
 | onChange    | function      |             | it enables to subscribe change event|
@@ -427,4 +429,3 @@ All the properties of the Individual children of type [checkbox, radio]
 
 ## License
 MIT Licensed. Copyright (c) Mytabworks 2020.
-

@@ -86,7 +86,7 @@ export const useForm = (fields = {}) => {
             const states = {...form}
 
             const statuses = Object.keys(form).reduce((result, name) => {
-                const target = document.querySelector(`[alias="${name}"], [name="${name}"]`)
+                const target = event.target.querySelector(`[alias="${name}"], [name="${name}"]`)
 
                 return target ? formUpdater(result, target, name) : result
             }, states)
@@ -94,7 +94,7 @@ export const useForm = (fields = {}) => {
             setForm(statuses)
 
             const formevent = new FormEvent(event.target, statuses)
-            return onSubmit(formevent)
+            typeof onSubmit === "function" && onSubmit(formevent)
         }
 
     }

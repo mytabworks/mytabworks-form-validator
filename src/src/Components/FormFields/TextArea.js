@@ -36,7 +36,7 @@ const TextArea = ({id, label, name, validate, className, children, alias, onChan
     return (
         <div className={`form-control ${className}`.trim()}>
             {label && <label htmlFor={finalId}>{label}{validate && validate.includes('required') && <span className="required">*</span>}</label>}
-            <textarea id={finalId} {...props} {...handleEvents} >{children}</textarea>
+            <textarea id={finalId} {...props} {...handleEvents} ></textarea>
             {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
         </div>
     )
