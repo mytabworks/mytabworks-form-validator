@@ -78,7 +78,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
 
 
 # Customizable
-It can customize a new Component for validation and can even implement on old Component without changing its props
+It can customize a new component for validation and can even implement on old component without changing its props
 
 
 ## Before Customize
