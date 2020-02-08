@@ -228,9 +228,9 @@ Validator.extend({ max_size, min_size, required_if, alpha_space })
     export const ReasonFields = () =>{
         retrun (
             <div>
-                <Input type="text" validate="alpha_space" name="rss" id="rss" label="Reasons">
-                <Input type="file" validate="required_if:rss@Reasons=(.+)@has content|mimes:csv,xls|min_size:1000|max_size:5000" name="flexa" id="flexa" label="File XA">
-                <Input type="text" validate="required_if:flexa=(.*\\.xls)@spreadshit" name="commit" id="commit" label="Commit">
+                <Input type="text" validate="alpha_space" name="rss" id="rss" label="Reasons"/>
+                <Input type="file" validate="required_if:rss@Reasons=(.+)@has content|mimes:jpeg,xls|min_size:1000|max_size:5000" name="flexa" id="flexa" label="File XA"/>
+                <Input type="text" validate="required_if:flexa=(.*\\.jpeg)@spreadshit" name="commit" id="commit" label="Commit"/>
             </div>
         )
     }
@@ -271,9 +271,9 @@ Validator.extend({ same, strong_password })
     export const Register = () =>{
         retrun (
             <Form>
-                <Input type="text" validate="required|alpha" name="hname" id="hname" label="Name"> 
-                <Input type="password" validate="required|strong_password" name="p_word" id="p_word" label="Password"> 
-                <Input type="password" validate="required|same:p_word@Password" name="confirm" id="confirm" label="Confirm">
+                <Input type="text" validate="required|alpha" name="hname" id="hname" label="Name"/> 
+                <Input type="password" validate="required|strong_password" name="p_word" id="p_word" label="Password"/> 
+                <Input type="password" validate="required|same:p_word@Password" name="confirm" id="confirm" label="Confirm"/>
                 <button type="submit">Submit</button>
             </Form>
         )
