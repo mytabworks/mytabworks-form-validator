@@ -16,7 +16,7 @@ const InputDefaultProps = {
 const convertToChild = ({finalId, options, props}) => {
     return !Array.isArray(options)
         ? options
-        : options.map(({ label, ...individualAttr }, key) => <label key={finalId + '-' + key}><input {...props} {...individualAttr} /><span>{label}</span></label>)
+        : options.map(({ label, ...individualAttr }, key) => <label key={finalId + '-' + key}><input {...props} {...individualAttr} /><span></span>{label}</label>)
 }
 
 const Input = ({id, label, name, rules, type, className, children, alias, onChange, ...props}) => {
@@ -29,14 +29,12 @@ const Input = ({id, label, name, rules, type, className, children, alias, onChan
 
     props = { ...props, name, type, alias}
     
-    const formControlProps = isChoices || { finalId, label, rules, className, children, state }
+    const formControlProps = { finalId, label, rules, className, state }
 
     return isChoices ? (
-        <div className={`form-control ${className}`.trim()} {...handleEvents} id={finalId}>
-          {label && <label htmlFor={finalId}>{label}{rules && rules.includes('required') && <span className="required">*</span>}</label>}
-          {convertToChild({finalId, options: children, props})}
-          {state && state.isInvalid && <span className="error-msg">{state.message}</span>}
-        </div>
+        <FormControl {...formControlProps} {...handleEvents} id={finalId}>
+            {convertToChild({finalId, options: children, props})}
+        </FormControl>
     ) : (
         <FormControl {...formControlProps}>
             <input id={finalId} {...props} {...handleEvents} />
