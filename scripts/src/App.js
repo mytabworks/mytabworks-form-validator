@@ -1,4 +1,5 @@
 import React from 'react';  
+import './bootstrap.min.css'
 import {Input, Select, TextArea, Form, useFormState} from './Components' 
 import { Validator } from 'mytabworks-utils'
 import { same, required_if, max_size } from 'mytabworks-utils/extend/rules'
@@ -38,14 +39,14 @@ const Design = () => {
 
   return (
     <div>
-        <div>
+        <div className="form-group">
             <label>UI</label>
-            <input name="ui" onChange={formUpdate}/>
+            <input className="form-control" name="ui" onChange={formUpdate}/>
             {ui && ui.isInvalid && ui.message} 
         </div>
-        <div>
+        <div className="form-group">
             <label>ux</label>
-            <input name="ux" onChange={formUpdate} />
+            <input className="form-control" name="ux" onChange={formUpdate} />
             {ux && ux.isInvalid && ux.message} 
         </div>
     </div>
@@ -61,7 +62,7 @@ function App() {
     const value = e.target.value; setState({value: value})
   }
   return (
-    <div style={{display:"flex", justifyContent:"center"}}>
+    <div className="container">
       <Form ref={form} id="example-basic" method="post" name="example" onSubmit={onSubmit} style={{width:"500px"}}>
             { state.value === '1' && <Design/> }
             <Input rules="required|same:sample@Sample" type="text" name="name" placeholder="enter your name..." label="Name" onChange={handler}/>
