@@ -10,9 +10,9 @@ describe('TextArea consistent test agrregation', () => {
 
         const textarea = getByTestId("test")
 
-        const form_control = textarea.closest('.form-control')
+        const form_group = textarea.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
         
         expect(textarea).toBeInTheDocument()
 
@@ -28,13 +28,13 @@ describe('TextArea consistent test agrregation', () => {
 
         expect(label).not.toBeInTheDocument()
         
-        expect(form_control.className).toBe('form-control')
+        expect(form_group.className).toBe('form-group')
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).not.toBeInTheDocument()
     })
@@ -50,9 +50,9 @@ describe('TextArea consistent test agrregation', () => {
 
         const input = getByTestId("test")
 
-        const form_control = input.closest('.form-control')
+        const form_group = input.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
         
         expect(input).toBeInTheDocument()
 
@@ -76,13 +76,13 @@ describe('TextArea consistent test agrregation', () => {
 
         expect(label.textContent).toBe('TXT*')
 
-        expect(form_control.className).toBe('form-control formation') 
+        expect(form_group.className).toBe('form-group formation') 
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).toBeInTheDocument()
     })

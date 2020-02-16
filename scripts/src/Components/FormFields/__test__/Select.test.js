@@ -48,9 +48,9 @@ describe('Select consistent test agrregation', () => {
 
         expect(expert).toBeTruthy()
 
-        const form_control = select.closest('.form-control')
+        const form_group = select.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
 
         expect(label).not.toBeInTheDocument()
 
@@ -58,13 +58,13 @@ describe('Select consistent test agrregation', () => {
 
         expect(select.getAttribute('alias')).toBe('sel')
 
-        expect(form_control.className).toBe('form-control')
+        expect(form_group.className).toBe('form-group')
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).not.toBeInTheDocument()
 
@@ -97,17 +97,17 @@ describe('Select consistent test agrregation', () => {
 
         expect(expert).toBeTruthy()
 
-        const form_control = select.closest('.form-control')
+        const form_group = select.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
 
         expect(label).toBeInTheDocument()
 
         expect(label.textContent).toBe('Multiple*')
 
-        expect(form_control.className).toBe('form-control')
+        expect(form_group.className).toBe('form-group')
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).toBeInTheDocument()
     })
@@ -139,15 +139,15 @@ describe('Select consistent test agrregation', () => {
 
         expect(expert).toBeTruthy()
 
-        const form_control = select.closest('.form-control')
+        const form_group = select.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
 
         expect(label).toBeInTheDocument()
 
         expect(label.textContent).toBe('Multiple2')
 
-        expect(form_control.className).toBe('form-control multiple')
+        expect(form_group.className).toBe('form-group multiple')
 
     })
 
@@ -177,15 +177,15 @@ describe('Select consistent test agrregation', () => {
 
         expect(expert).toBeTruthy()
 
-        const form_control = select.closest('.form-control')
+        const form_group = select.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
 
         expect(label).toBeInTheDocument()
 
         expect(label.textContent).toBe('Multiple')
 
-        expect(form_control.className).toBe('form-control multiple')
+        expect(form_group.className).toBe('form-group multiple')
 
         expect(select.selectedOptions.length).toBe(2)
 
@@ -220,15 +220,15 @@ describe('Select consistent test agrregation', () => {
 
         expect(expert).toBeTruthy()
 
-        const form_control = select.closest('.form-control')
+        const form_group = select.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
 
         expect(label).toBeInTheDocument()
 
         expect(label.textContent).toBe('Multiple')
 
-        expect(form_control.className).toBe('form-control multiple')
+        expect(form_group.className).toBe('form-group multiple')
 
         expect(select).toHaveAttribute('alias')
 

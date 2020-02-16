@@ -9,9 +9,9 @@ describe('Input consistent test agrregation', () => {
 
         const input = getByTestId("test")
 
-        const form_control = input.closest('.form-control')
+        const form_group = input.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
         
         expect(input).toBeInTheDocument()
 
@@ -31,13 +31,13 @@ describe('Input consistent test agrregation', () => {
 
         expect(label).not.toBeInTheDocument()
         
-        expect(form_control.className).toBe('form-control')
+        expect(form_group.className).toBe('form-group')
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).not.toBeInTheDocument()
     })
@@ -47,9 +47,9 @@ describe('Input consistent test agrregation', () => {
 
         const input = getByTestId("test")
 
-        const form_control = input.closest('.form-control')
+        const form_group = input.closest('.form-group')
 
-        const label = form_control.querySelector('label')
+        const label = form_group.querySelector('label')
         
         expect(input).toBeInTheDocument()
 
@@ -77,23 +77,23 @@ describe('Input consistent test agrregation', () => {
 
         expect(label.textContent).toBe('Xample*')
 
-        expect(form_control.className).toBe('form-control formation')
+        expect(form_group.className).toBe('form-group formation')
         
         // input.focus()
 
         // input.blur()
 
-        // const error_msg = form_control.querySelector('.error-msg')
+        // const error_msg = form_group.querySelector('.error-msg')
 
         // expect(error_msg).toBeInTheDocument()
 
         // expect(error_msg.textContent).toBe('The Xample field is requireds')
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).toBeInTheDocument()
     })
@@ -115,7 +115,7 @@ describe('Input consistent test agrregation', () => {
 
         const label = getByText('Checkbox')
 
-        const form_control = label.closest('.form-control')
+        const form_group = label.closest('.form-group')
 
         expect(inputs.length).toBe(4)
 
@@ -144,17 +144,17 @@ describe('Input consistent test agrregation', () => {
 
         expect(label.textContent).toBe('Checkbox*')
 
-        expect(form_control.className).toBe('form-control formation')
+        expect(form_group.className).toBe('form-group formation')
 
-        expect(form_control).toHaveAttribute('id')
+        expect(form_group).toHaveAttribute('id')
 
-        expect(form_control.id).toBe('test-3')
+        expect(form_group.id).toBe('test-3')
 
-        let error = form_control.querySelector('.error-msg')
+        let error = form_group.querySelector('.error-msg')
 
         expect(error).not.toBeInTheDocument()
 
-        let required = form_control.querySelector('.required')
+        let required = form_group.querySelector('.required')
 
         expect(required).toBeInTheDocument()
         
