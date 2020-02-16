@@ -5,8 +5,34 @@ It is `light-weight` because it was build from the ground up, no extra dependenc
 It is `easy` to implement, because in just a few characters you are validating. it can be implemented with other component without a sweat, cheers!</br>
 It is `fast` because it is made to be fast, it was build to make the state rest from every entry, and it don't need to call the whole reducer like redux does.
 It is `powerful` bacause you can rules your form field components without affecting your properties. that is why it can be easily use in both small and scalable projects.</br>
-It is `beautiful` because it don`t need a ugly and redandunt hard to maintain conditional validation code, and rendering of event handlers to children to children, because validation can be implemented beautifully in components to components without the old fashion terror implementation.</br>
-The validation style is inspired by Laravel Validator!.
+It is `beautiful` because it don`t need a ugly and redandunt hard to maintain conditional rules code, and rendering of event handlers to children to children, because rules can be implemented beautifully in components to components without the old fashion terror implementation.</br>
+The rules style is inspired by Laravel Validator!.
+
+- [Installation](#installation)
+- [How To Use](#how-to-use)
+    - [Importing](#import-to-your-project)
+    - [Stylesheet](#stylesheet)
+    - [Basic Usage](#basic-usage)
+    - [Advance Usage with rules](advance-usage-with-rules)
+    - [Customize](#customize)
+        - [Before](#before-customize)
+        - [After](#after-customize)
+        - [Implementation of Customize](#implementation-of-customize)
+    - [Form Submition](#form-submition)
+- [Rules](#rules) 
+    - [How To Extend Rules](#how-to-extend-rules)
+    - [How To Create A Customize Rules](#how-to-create-a-customize-rules)
+- [Properties](#properties)  
+    - [Form Properties](#form-properties)
+        - [FormEvent Properties](#formevent-properties)
+    - [Select Properties](#select-properties)
+        - [Select Option Properties](#select-option-properties)
+        - [Select Option With Group Usage](#select-option-with-group-usage)
+    - [TextArea Properties](#textarea-properties)
+    - [Input Properties](#input-properties)
+        - [Input type [checkbox, radio] Children Individual property](#input-properties)
+        - [Example For type [checkbox, radio]](#input-properties) 
+- [License](#license)
 
 # installation
 ```
@@ -20,6 +46,13 @@ npm i mytabworks-react-form-validator
 ## import to your project
 ```js
 import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
+```
+
+
+## Stylesheet
+mytabworks-form-validator Form component doesn't require stylesheet. however for component Input, TextArea, and Select need a stylesheet. it is seperated to reduce payload when not using field components
+```js
+import "mytabworks-react-form-validator/field.css"
 ```
 
 
@@ -77,7 +110,7 @@ import {Form, Input, TextArea, Select} from "mytabworks-react-form-validator"
 
 
 # Customizable
-It can customize a new component for validation and can even implement on old component without changing its props
+It can implement rules in new and old component without changing its property structure
 
 
 ## Before Customize
@@ -170,7 +203,7 @@ export const Fields = () {
 ```js
 const handleSubmit = (formevent) => {
     if(formevent.isReady()) { 
-        /*all fields validation is passed*/
+        /*all fields rules is passed*/
         
         fetch("/request", {
             method: "POST", 
@@ -183,7 +216,7 @@ const handleSubmit = (formevent) => {
         .then(/*next move*/)
 
     } else {
-        /*some fields validation is failed*/
+        /*some fields rules is failed*/
     }
 }
 ```
@@ -195,14 +228,14 @@ const handleSubmit = (formevent) => {
 ```
 
 
-## rules
+# rules
 
-### [What are the current or supported rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-main-rules)
+### [What are the current or supported rules](https://github.com/mytabworks/mytabworks-utils#validator-main-rules)
 
-### [What are the extension rules? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extension-rules)
+### [What are the extension rules](https://github.com/mytabworks/mytabworks-utils#validator-extension-rules)
 
-### [How to extend a validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-extend-rules-usage))
-Validator does not require to repeatedly extend validation each component, you only have to extend rules each once, I suggest to import it to the ancestors component that handle all Forms
+### [How to extend a rules](https://github.com/mytabworks/mytabworks-utils#validator-extend-rules-usage))
+Validator does not require to repeatedly extend rules each component, you only have to extend rules each once, I suggest to import it to the ancestors component that handle all Forms
 
 ```js
 import { Validator } from "mytabworks-utils";
@@ -236,7 +269,7 @@ Validator.rulesExtend({ max_size, min_size, required_if, alpha_space })
     }
 ```
 
-### [How to create a customize validation? Click Me](https://github.com/mytabworks/mytabworks-utils#validator-customize-rule-usage)
+### [How to create a customize rules](https://github.com/mytabworks/mytabworks-utils#validator-customize-rule-usage)
 
 ```js
 import { Validator } from "mytabworks-utils";
@@ -252,13 +285,13 @@ const strong_password = {
         first_param, /*rules:first_param*/ 
         second_param    /*rules:first_param=second_param*/
     ) {
-        /*we don't need first_param and second_param for this validation*/
+        /*we don't need first_param and second_param for this rules*/
         /*must return true when it is INVALID*/
         return !this.regexp.test(received)
     },
     message: "The :attribute must have 1 small letter, 1 capital letter, 1 number, and 1 special character"
     /*note! the :attribute is replace with the label of the form field you rules*/
-    /*note! if you have first_param in your rules you must put the same name as your validation like :strong_password in the message*/
+    /*note! if you have first_param in your rules you must put the same name as your rules like :strong_password in the message*/
     /*note! if you have second_param you must put :third_party in the message*/
 }
 
@@ -399,7 +432,7 @@ The datatypes with "*" means it is required.
 | ....etc     |               |             | you can passed on anything in input tag supported or data-something |
 
 
-### `Input type [checkbox, radio] children individual props`
+### `Input type [checkbox, radio] children individual properties`
 All the properties of the Individual children of type [checkbox, radio]
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
