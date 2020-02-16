@@ -1,6 +1,11 @@
 form {
     width: 100%;
 }
+
+form *{
+  box-sizing: border-box;
+}
+
 .form-group {
   position: relative;
   width: 100%;
@@ -93,6 +98,9 @@ form {
 .form-group input[type='radio']:checked + span:after {
   background-color: #5fab5f;
 }
+.form-group > input[type='color'] {
+  padding: 0;
+}
 
 .form-group > input,
 .form-group > select,
@@ -120,17 +128,23 @@ form {
 .form-group.form-error input,
 .form-group.form-error select,
 .form-group.form-error textarea,
-.form-group.form-error input[type='checkbox'] + span:before,
-.form-group.form-error input[type='radio'] + span:before {
+.form-group.form-error input[type='checkbox'] + span,
+.form-group.form-error input[type='radio'] + span {
   border-color: salmon;
 }
 
-.form-group input[type='radio']:disabled + span:after,
-.form-group input[type='checked']:disabled + span:before,
-.form-group input[type='radio']:disabled + span:before,
+.form-group input[type='checkbox']:disabled + span,
+.form-group input[type='radio']:disabled + span,
 .form-group > input:disabled,
 .form-group > input:read-only,
 .form-group > select:disabled,
 .form-group > textarea:disabled {
-  background-color: #ececec !important;
+  background-color: #e0e0e0 !important;
+}
+
+.form-group input[type='radio']:checked:disabled + span:after{
+  background-color: #8c8c8c !important;
+}
+.form-group input[type='checkbox']:disabled + span:after {
+  border-color: #8c8c8c;
 }
