@@ -71,7 +71,7 @@ function App() {
             <Input rules="required" type="radio" name="gender" className="inline-box" label="Gender" onChange={handler}>
               {[
                 {label: 'male', value: '1'},
-                {label: 'female', value: '2'},
+                {label: 'female', value: '2', disabled: true},
               ]}
             </Input>
             <Input rules="min:2|max:3" type="checkbox" name="interested[]" className="inline-box" label="Interested">
@@ -79,7 +79,7 @@ function App() {
                 {label: 'javascript', value: '1'},
                 {label: 'c#', value: '2'},
                 {label: 'php', value: '3'},
-                {label: 'java', value: '4', defaultChecked: true},
+                {label: 'java', value: '4', disabled:true, defaultChecked: true},
               ]: [
                 {label: 'php', value: '3'},
                 {label: 'java', value: '4'},
