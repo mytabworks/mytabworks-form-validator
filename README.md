@@ -14,7 +14,7 @@ The rules style is inspired by Laravel Validator!.
     - [Stylesheet](#stylesheet)
     - [Basic Usage](#basic-usage)
     - [Advance Usage with rules](advance-usage-with-rules)
-    - [Customize](#customize)
+    - [Customize](#customizable)
         - [Before](#before-customize)
         - [After](#after-customize)
         - [Implementation of Customize](#implementation-of-customize)
@@ -345,18 +345,18 @@ The datatypes with "*" means it is required.
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
 |-------------|---------------|-------------|-------------|
-| id          | string *      |             | id of the HTML select|
-| name        | string *      |             | name of the HTML select|
-| label       | string        |             | the label of your form field|
-| value       | array\|string |             | the set the controllable value|
-| defaultValue| array\|string |             | the set the default value| 
-| className   | string        |             | additional className for the Component container|
+| id          | string *      |   &nbsp;          | id of the HTML select|
+| name        | string *      |   &nbsp;          | name of the HTML select|
+| label       | string        |   &nbsp;          | the label of your form field|
+| value       | array\|string |   &nbsp;          | the set the controllable value|
+| defaultValue| array\|string |   &nbsp;          | the set the default value| 
+| className   | string        |   &nbsp;          | additional className for the Component container|
 | disabled    | bolean        | false       | disabling the Select|
 | multiple    | boolean       | false       | it allow users to select multiple option|
-| onChange    | function      |             | it enables to subscribe change event|
-| rules    | string        |             | it enables to rules the form field|
-| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
-| ....etc     |               |             | you can passed on anything in select tag supported or data-something |
+| onChange    | function      |   &nbsp;          | it enables to subscribe change event|
+| rules    | string        |      &nbsp;       | it enables to rules the form field|
+| alias       | string        |   &nbsp;          | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
+| ....etc     |               |   &nbsp;          | you can passed on anything in select tag supported or data-something |
 
 
 ### `Select option properties`
@@ -364,9 +364,9 @@ All the properties of each option
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
 |-------------|---------------|-------------|-------------|
-| label       | string *      |             | label of the option|
-| value       | string|array *|             | the value of the option, if array of object of label and value will be group in optgroup| 
-| ....etc     |               |             | you can passed on anything individually supported or data-something |
+| label       | string *      |   &nbsp;          | label of the option|
+| value       | string|array *|   &nbsp;          | the value of the option, if array of object of label and value will be group in optgroup| 
+| ....etc     |               |   &nbsp;          | you can passed on anything individually supported or data-something |
 
 
 ### Select option with group usage 
@@ -397,18 +397,18 @@ The datatypes with "*" means it is required.
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
 |-------------|---------------|-------------|-------------|
-| id          | string *      |             | id of the HTML textarea|
-| name        | string *      |             | name of the HTML textarea|
-| label       | string        |             | the label of your form field|
-| value       | array\|string |             | the set the controllable value|
-| defaultValue| array\|string |             | the set the default value| 
-| placeholder | string        |             | placeholder of your textarea|
-| className   | string        |             | additional className for the Component container|
+| id          | string *      |  &nbsp;           | id of the HTML textarea|
+| name        | string *      |  &nbsp;           | name of the HTML textarea|
+| label       | string        |  &nbsp;           | the label of your form field|
+| value       | array\|string |  &nbsp;           | the set the controllable value|
+| defaultValue| array\|string |  &nbsp;           | the set the default value| 
+| placeholder | string        |  &nbsp;           | placeholder of your textarea|
+| className   | string        |  &nbsp;           | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the textarea| 
-| onChange    | function      |             | it enables to subscribe change event|
-| rules    | string        |             | it enables to rules the form field|
-| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
-| ....etc     |               |             | you can passed on anything in textarea tag supported or data-something |
+| onChange    | function      |  &nbsp;           | it enables to subscribe change event|
+| rules    | string        |     &nbsp;        | it enables to rules the form field|
+| alias       | string        |  &nbsp;           | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
+| ....etc     |               |  &nbsp;           | you can passed on anything in textarea tag supported or data-something |
 
 
 ## `Input` Properties
@@ -417,19 +417,19 @@ The datatypes with "*" means it is required.
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
 |-------------|---------------|-------------|-------------|
-| id          | string *      |             | id of the HTML input|
-| name        | string *      |             | name of the HTML input|
+| id          | string *      |  &nbsp;           | id of the HTML input|
+| name        | string *      |  &nbsp;           | name of the HTML input|
 | type        | string        | text        | type of the HTML input. all the type in input field is supported, but radio and checkbox have small different mechanics because it is a selection|
-| label       | string        |             | the label of your form field|
-| value       | array\|string |             | the set the controllable value only for [type of fields that supported it]|
-| defaultValue| array\|string |             | the set the default value only for [type of fields that supported it]| 
-| placeholder | string        |             | placeholder of your input exluded [radio, checkbox, color, range]|
-| className   | string        |             | additional className for the Component container|
+| label       | string        |  &nbsp;           | the label of your form field|
+| value       | array\|string |  &nbsp;           | the set the controllable value only for [type of fields that supported it]|
+| defaultValue| array\|string |  &nbsp;           | the set the default value only for [type of fields that supported it]| 
+| placeholder | string        |  &nbsp;           | placeholder of your input exluded [radio, checkbox, color, range]|
+| className   | string        |  &nbsp;           | additional className for the Component container|
 | disabled    | boolean       | false       | disabling the input | 
-| onChange    | function      |             | it enables to subscribe change event|
-| rules    | string        |             | it enables to rules the form field|
-| alias       | string        |             | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
-| ....etc     |               |             | you can passed on anything in input tag supported or data-something |
+| onChange    | function      |  &nbsp;           | it enables to subscribe change event|
+| rules    | string        |     &nbsp;        | it enables to rules the form field|
+| alias       | string        |  &nbsp;           | it enables to distinctively rules a form field with the same name, especially when user have priviledges to add new field| 
+| ....etc     |               |  &nbsp;           | you can passed on anything in input tag supported or data-something |
 
 
 ### `Input type [checkbox, radio] children individual properties`
@@ -437,8 +437,8 @@ All the properties of the Individual children of type [checkbox, radio]
 
 |`PROPERTY`   |`DATATYPES`    |`DEFAULT`    |`DESCRIPTION`|
 |-------------|---------------|-------------|-------------|
-| label       | string *      |             | label in the Input Component is the label of the form field container and this is the label of your input type [checkbox, radio]|
-| value       | string *      |             | the value of the input type [checkbox, radio]|
+| label       | string *      |  &nbsp;           | label in the Input Component is the label of the form field container and this is the label of your input type [checkbox, radio]|
+| value       | string *      |  &nbsp;           | the value of the input type [checkbox, radio]|
 | disabled    | boolean       | false       | disabling the [checkbox, radio] individually | 
 | defaultChecked| boolean     | false       | it will checked individually the type [checkbox, radio] |
 | ....etc     |               |             | you can passed on anything individually supported or data-something |
@@ -446,7 +446,7 @@ All the properties of the Individual children of type [checkbox, radio]
 
 ### `Example for type [checkbox, radio]`
 ```html
-/*All properties set in Input will be a property of all the individual except [className, label, rules] because this will all goes in form field container*/
+All properties set in Input will be a property of all the individual except [className, label, rules] because this will all goes in form field container
 <Form>
     <Input type="checkbox" id="interest" name="interested[]" className="inline-box" label="Interested">
         {[
